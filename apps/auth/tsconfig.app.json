@@ -1,0 +1,8 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "outDir": "../../dist/apps/auth"
+  },
+  "include": ["src/**/*", "../../libs/shared/src/**/*"],
+  "exclude": ["node_modules", "dist", "prisma/generated", "**/*spec.ts"]
+}

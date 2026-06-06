@@ -1,0 +1,24 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "./generated/client"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Post {
+  id        String   @id @default(uuid())
+  authorId  String
+  content   String   @db.Text
+  parentId  String?
+  createdAt DateTime @default(now())
+
+  parent  Post?  @relation("PostReplies", fields: [parentId], references: [id], onDelete: Cascade)
+  replies Post[] @relation("PostReplies")
+
+  @@index([parentId, createdAt])
+  @@index([createdAt])
+  @@index([authorId])
+}
