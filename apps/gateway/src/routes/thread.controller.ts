@@ -10,7 +10,16 @@ import {
   rethrow,
 } from '@goodshares/shared';
 import { AuthedRequest, JwtAuthGuard } from '../common/jwt-auth.guard';
+import {
+  ApiBearerAuth,
+  ApiBody,
+  ApiOperation,
+  ApiParam,
+  ApiResponse,
+  ApiTags,
+} from '@nestjs/swagger';
 
+@ApiTags('threads')
 @Controller('threads')
 export class ThreadController {
   constructor(
@@ -21,11 +30,14 @@ export class ThreadController {
   private postUrl() {
     return this.config.get<string>('POST_SERVICE_URL');
   }
+
   private userUrl() {
     return this.config.get<string>('USER_SERVICE_URL');
   }
 
   @Get()
+  @ApiOperation({ summary: 'List all threads with author info' })
+  @ApiResponse({ status: 200, description: 'Array of threads with author details' })
   async list(): Promise<PostWithAuthor[]> {
     try {
       const { data: posts } = await firstValueFrom(
@@ -38,6 +50,10 @@ export class ThreadController {
   }
 
   @Get(':id')
+  @ApiOperation({ summary: 'Get a single thread with all its replies' })
+  @ApiParam({ name: 'id', description: 'Thread (post) ID' })
+  @ApiResponse({ status: 200, description: 'Thread with nested replies and author info' })
+  @ApiResponse({ status: 404, description: 'Thread not found' })
   async get(@Param('id') id: string) {
     try {
       const { data } = await firstValueFrom(
@@ -53,6 +69,11 @@ export class ThreadController {
 
   @Post()
   @UseGuards(JwtAuthGuard)
+  @ApiBearerAuth()
+  @ApiOperation({ summary: 'Create a new thread (requires authentication)' })
+  @ApiBody({ type: ContentDto })
+  @ApiResponse({ status: 201, description: 'Thread created successfully' })
+  @ApiResponse({ status: 401, description: 'Missing or invalid bearer token' })
   async create(@Req() req: AuthedRequest, @Body() dto: ContentDto) {
     try {
       const { data } = await firstValueFrom(
@@ -69,6 +90,13 @@ export class ThreadController {
 
   @Post(':id/replies')
   @UseGuards(JwtAuthGuard)
+  @ApiBearerAuth()
+  @ApiOperation({ summary: 'Reply to an existing thread (requires authentication)' })
+  @ApiParam({ name: 'id', description: 'Thread (post) ID to reply to' })
+  @ApiBody({ type: ContentDto })
+  @ApiResponse({ status: 201, description: 'Reply created successfully' })
+  @ApiResponse({ status: 401, description: 'Missing or invalid bearer token' })
+  @ApiResponse({ status: 404, description: 'Thread not found' })
   async reply(
     @Req() req: AuthedRequest,
     @Param('id') id: string,

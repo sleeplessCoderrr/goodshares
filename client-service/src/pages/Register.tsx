@@ -31,35 +31,58 @@ export function Register() {
   }
 
   return (
-    <>
-      <h1>Register</h1>
+    <div className="auth-card">
+      <h1>Create account</h1>
       <form onSubmit={onSubmit}>
         <label>
-          email
-          <input type="email" value={form.email} onChange={(e) => set('email', e.target.value)} required />
-        </label>
-        <label>
-          username
-          <input value={form.username} onChange={(e) => set('username', e.target.value)} required />
-        </label>
-        <label>
-          display name
-          <input value={form.displayName} onChange={(e) => set('displayName', e.target.value)} required />
-        </label>
-        <label>
-          password
+          Display name
           <input
+            id="reg-displayname"
+            value={form.displayName}
+            onChange={(e) => set('displayName', e.target.value)}
+            placeholder="Alice"
+            required
+          />
+        </label>
+        <label>
+          Username
+          <input
+            id="reg-username"
+            value={form.username}
+            onChange={(e) => set('username', e.target.value)}
+            placeholder="alice_99"
+            required
+          />
+        </label>
+        <label>
+          Email
+          <input
+            id="reg-email"
+            type="email"
+            value={form.email}
+            onChange={(e) => set('email', e.target.value)}
+            placeholder="you@example.com"
+            required
+          />
+        </label>
+        <label>
+          Password <span style={{ fontWeight: 400, opacity: 0.6 }}>(min 8 chars)</span>
+          <input
+            id="reg-password"
             type="password"
             value={form.password}
             onChange={(e) => set('password', e.target.value)}
+            placeholder="••••••••"
             minLength={8}
             required
           />
         </label>
         {error && <div className="error">{error}</div>}
-        <button type="submit" disabled={busy}>{busy ? '...' : 'Create account'}</button>
+        <button id="reg-submit" type="submit" disabled={busy}>
+          {busy ? 'Creating account…' : 'Create account'}
+        </button>
       </form>
-      <p>Have an account? <Link to="/login">Login</Link></p>
-    </>
+      <p>Have an account? <Link to="/login">Sign in</Link></p>
+    </div>
   );
 }

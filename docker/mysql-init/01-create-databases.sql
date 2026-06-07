@@ -1,0 +1,3 @@
+CREATE DATABASE IF NOT EXISTS goodshares_auth;
+CREATE DATABASE IF NOT EXISTS goodshares_user;
+CREATE DATABASE IF NOT EXISTS goodshares_post;

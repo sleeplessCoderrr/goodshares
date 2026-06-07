@@ -9,12 +9,20 @@ function Nav() {
   const { user, signOut } = useSession();
   return (
     <header className="nav">
-      <Link to="/"><strong>goodshares</strong></Link>
+      <Link to="/" className="nav-brand">
+        goodshares
+      </Link>
       <nav>
         {user ? (
           <>
-            <span>{user.username}</span>
-            <a href="#" onClick={(e) => { e.preventDefault(); signOut(); }}>sign out</a>
+            <span className="nav-username">@{user.username}</span>
+            <a
+              href="#"
+              className="nav-signout"
+              onClick={(e) => { e.preventDefault(); signOut(); }}
+            >
+              sign out
+            </a>
           </>
         ) : (
           <>

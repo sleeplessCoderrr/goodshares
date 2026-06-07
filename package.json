@@ -27,12 +27,12 @@
     "prisma:generate:auth": "prisma generate --schema=apps/auth/prisma/schema.prisma",
     "prisma:generate:user": "prisma generate --schema=apps/user/prisma/schema.prisma",
     "prisma:generate:post": "prisma generate --schema=apps/post/prisma/schema.prisma",
-    "prisma:migrate:auth": "prisma migrate dev --schema=apps/auth/prisma/schema.prisma",
-    "prisma:migrate:user": "prisma migrate dev --schema=apps/user/prisma/schema.prisma",
-    "prisma:migrate:post": "prisma migrate dev --schema=apps/post/prisma/schema.prisma",
-    "prisma:studio:auth": "prisma studio --schema=apps/auth/prisma/schema.prisma",
-    "prisma:studio:user": "prisma studio --schema=apps/user/prisma/schema.prisma",
-    "prisma:studio:post": "prisma studio --schema=apps/post/prisma/schema.prisma"
+    "prisma:migrate:auth": "dotenv -e apps/auth/.env -- prisma migrate dev --schema=apps/auth/prisma/schema.prisma",
+    "prisma:migrate:user": "dotenv -e apps/user/.env -- prisma migrate dev --schema=apps/user/prisma/schema.prisma",
+    "prisma:migrate:post": "dotenv -e apps/post/.env -- prisma migrate dev --schema=apps/post/prisma/schema.prisma",
+    "prisma:studio:auth": "dotenv -e apps/auth/.env -- prisma studio --schema=apps/auth/prisma/schema.prisma",
+    "prisma:studio:user": "dotenv -e apps/user/.env -- prisma studio --schema=apps/user/prisma/schema.prisma",
+    "prisma:studio:post": "dotenv -e apps/post/.env -- prisma studio --schema=apps/post/prisma/schema.prisma"
   },
   "dependencies": {
     "@nestjs/axios": "^4.0.0",
@@ -41,6 +41,7 @@
     "@nestjs/core": "^11.0.0",
     "@nestjs/jwt": "^11.0.0",
     "@nestjs/platform-express": "^11.0.0",
+    "@nestjs/swagger": "^11.4.4",
     "@prisma/client": "^6.0.0",
     "axios": "^1.7.0",
     "bcrypt": "^5.1.1",
@@ -48,7 +49,8 @@
     "class-validator": "^0.14.1",
     "dotenv-cli": "^7.4.0",
     "reflect-metadata": "^0.2.2",
-    "rxjs": "^7.8.1"
+    "rxjs": "^7.8.1",
+    "swagger-ui-express": "^5.0.1"
   },
   "devDependencies": {
     "@nestjs/cli": "^11.0.0",

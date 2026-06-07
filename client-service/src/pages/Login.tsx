@@ -28,21 +28,37 @@ export function Login() {
   }
 
   return (
-    <>
-      <h1>Login</h1>
+    <div className="auth-card">
+      <h1>Welcome back</h1>
       <form onSubmit={onSubmit}>
         <label>
-          email
-          <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
+          Email
+          <input
+            id="login-email"
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder="you@example.com"
+            required
+          />
         </label>
         <label>
-          password
-          <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
+          Password
+          <input
+            id="login-password"
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            placeholder="••••••••"
+            required
+          />
         </label>
         {error && <div className="error">{error}</div>}
-        <button type="submit" disabled={busy}>{busy ? '...' : 'Sign in'}</button>
+        <button id="login-submit" type="submit" disabled={busy}>
+          {busy ? 'Signing in…' : 'Sign in'}
+        </button>
       </form>
-      <p>No account? <Link to="/register">Register</Link></p>
-    </>
+      <p>No account? <Link to="/register">Create one</Link></p>
+    </div>
   );
 }

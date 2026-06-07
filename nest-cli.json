@@ -5,9 +5,10 @@
   "monorepo": true,
   "root": "apps/gateway",
   "compilerOptions": {
-    "webpack": false,
+    "webpack": true,
     "tsConfigPath": "apps/gateway/tsconfig.app.json",
-    "deleteOutDir": true
+    "deleteOutDir": true,
+    "plugins": ["@nestjs/swagger"]
   },
   "projects": {
     "gateway": {
@@ -16,6 +17,7 @@
       "entryFile": "main",
       "sourceRoot": "apps/gateway/src",
       "compilerOptions": {
+        "webpack": true,
         "tsConfigPath": "apps/gateway/tsconfig.app.json"
       }
     },
@@ -25,6 +27,7 @@
       "entryFile": "main",
       "sourceRoot": "apps/auth/src",
       "compilerOptions": {
+        "webpack": true,
         "tsConfigPath": "apps/auth/tsconfig.app.json"
       }
     },
@@ -34,6 +37,7 @@
       "entryFile": "main",
       "sourceRoot": "apps/user/src",
       "compilerOptions": {
+        "webpack": true,
         "tsConfigPath": "apps/user/tsconfig.app.json"
       }
     },
@@ -43,6 +47,7 @@
       "entryFile": "main",
       "sourceRoot": "apps/post/src",
       "compilerOptions": {
+        "webpack": true,
         "tsConfigPath": "apps/post/tsconfig.app.json"
       }
     },
