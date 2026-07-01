@@ -8,15 +8,15 @@
   --bg-hover:    #272727;
 
   --border:      #2e2e2e;
-  --border-focus:#a78bfa;
+  --border-focus:#60a5fa;
 
   --text:        #e8e8e8;
   --text-muted:  #737373;
   --text-dim:    #a3a3a3;
 
-  --accent:      #a78bfa;
-  --accent-hover:#8b5cf6;
-  --accent-glow: rgba(167, 139, 250, 0.22);
+  --accent:      #60a5fa;
+  --accent-hover:#3b82f6;
+  --accent-glow: rgba(96, 165, 250, 0.22);
 
   --danger:      #f87171;
   --success:     #34d399;
